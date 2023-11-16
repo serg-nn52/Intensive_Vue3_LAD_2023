@@ -1,69 +1,24 @@
 <template>
   <div class="wrapper">
-    <PageHeader @incrCountEmit="(value) => console.log('emit', value)" :nameComponent="testVar" />
-    <PageContent>
-      <p>{{ 'name' + user.userName }}</p>
-      <p @click="incrAge">{{ 'age' + user.age }}</p>
-      <p>{{ 'doubleAge' + doubleAge }}</p>
-      <p>{{ emitData }}</p>
-      <template #bottomSlot>
-        <p>Bottom Slot Content</p>
-      </template>
-    </PageContent>
-    <PageFooter
-      :user="user"
-      :incrAge="incrAge"
-      @footer-emit="
-        (value) => {
-          console.log('footerEmit');
-          emitData = value;
-        }
-      "
-    />
+    <PageHeader @changeDarkTheme="changeDarkTheme" />
+    <PageContent :isDark="isDark" />
+    <PageFooter :isDark="isDark" />
   </div>
 </template>
 
 <script setup lang="ts">
-import PageHeader from '@/components/PageHeader.vue';
-import PageContent from '@/components/PageContent.vue';
+import PageHeader from '@/components/PageHeader/PageHeader.vue';
+import PageContent from '@/components/PageContent/PageContent.vue';
 import PageFooter from '@/components/PageFooter/PageFooter.vue';
-import { computed, ref, watch } from 'vue';
-import type { IUser } from './App.types';
+import { ref } from 'vue';
+import { getBooleanValueFromLs } from './utils/ls.utils';
+import { LocalStorageConstants } from './constants/ls.constants';
 
-//переменные реактивные
-const testVar = ref('HeaderTest');
+const isDark = ref<boolean>(getBooleanValueFromLs(LocalStorageConstants.THEME));
 
-const user = ref<IUser>({
-  userName: 'Serg',
-  age: 38
-});
-
-const emitData = ref<string>('');
-
-//методы
-const incrAge = () => {
-  user.value.age++;
+const changeDarkTheme = (value: boolean) => {
+  isDark.value = value;
 };
-
-//computed
-
-const doubleAge = computed(() => {
-  return user.value.age * 2;
-});
-
-//вотчеры
-
-watch(
-  user,
-  (newUser, oldUser) => {
-    // из официальной документации
-    // Note: `newValue` will be equal to `oldValue` here
-    // *unless* state.someObject has been replaced
-    console.log('newUser ', newUser.age);
-    console.log('oldUser ', oldUser.age);
-  },
-  { deep: true }
-);
 </script>
 
 <style lang="scss" scoped>

@@ -4,8 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: grey;
-  color: black;
-  font-size: 32px;
-  font-weight: 700;
+  background-color: var(--grey);
+  color: var(--black);
+  font-size: var(--title-fs);
+  font-weight: var(--bold-weight);
+  transition: var(--default-delay);
+}
+.dark-footer {
+  background-color: var(--black);
+  color: var(--grey);
+  transition: var(--default-delay);
 }
