@@ -9,6 +9,14 @@
 
   //font-size
   --title-fs: 32px;
+  --link-fs: 20px;
+  --post-fs: 20px;
+
+  @media (max-width: 768px) {
+    --title-fs: 28px;
+    --link-fs: 16px;
+    --post-fs: 16px;
+  }
 
   //font-weight
 

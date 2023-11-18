@@ -1,0 +1,30 @@
+.switch {
+  position: absolute;
+  right: 2rem;
+  opacity: 1;
+  @media (max-width: 1280px) {
+    position: static;
+  }
+  :deep() {
+    .v-switch__track {
+      background-color: var(--black);
+    }
+    .v-label {
+      color: var(--black);
+      opacity: 1;
+    }
+  }
+}
+.dark-switch {
+  :deep() {
+    .v-switch__track {
+      background-color: var(--black);
+    }
+    .v-label {
+      color: var(--grey);
+      @media (max-width: 1280px) {
+        color: var(--white);
+      }
+    }
+  }
+}

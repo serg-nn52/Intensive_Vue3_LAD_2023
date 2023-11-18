@@ -3,16 +3,13 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from '@/composables/useTheme';
 import { computed } from 'vue';
-import type { IPropsFooter } from './PageFooter.types';
-import { toRefs } from 'vue';
 
-const props = defineProps<IPropsFooter>();
-
-const { isDark } = toRefs(props);
+const { isDarkTheme } = useTheme();
 
 const footerClasses = computed(() => {
-  return { footer: true, ['dark-footer']: isDark.value };
+  return { footer: true, ['dark-footer']: isDarkTheme.value };
 });
 </script>
 

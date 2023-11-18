@@ -4,6 +4,8 @@
   font-size: var(--title-fs);
   font-weight: var(--bold-weight);
   padding: 2rem;
+  overflow: hidden;
+  flex-grow: 1;
 }
 .dark-content {
   background-color: var(--grey);

@@ -1,0 +1,30 @@
+.links {
+  background-color: var(--grey);
+  border-top: 1px solid var(--black);
+  opacity: var(--dark-opacity);
+  padding: 0 2rem;
+}
+.links-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.link {
+  margin-right: 5px;
+  font-size: var(--link-fs);
+  color: var(--white);
+  opacity: 0.6;
+  transition: var(--default-delay);
+  text-decoration: none;
+}
+.active-link {
+  opacity: 1;
+  transition: var(--default-delay);
+}
+.menu-links {
+  display: flex;
+  gap: 10px;
+}
