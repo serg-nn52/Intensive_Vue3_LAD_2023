@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteLocationNormalizedLoaded } from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import { Links, PathNames } from '@/constants/route.constants';
 import MainView from '@/views/MainView/MainView.vue';
@@ -12,7 +12,12 @@ const router = createRouter({
       component: MainView,
       meta: {
         layout: MainLayout,
-        title: 'Main Page'
+        title: 'Main Page',
+        breadcrumb: () => [
+          {
+            title: 'Main Page'
+          }
+        ]
       }
     },
     {
@@ -21,7 +26,16 @@ const router = createRouter({
       component: () => import('@/views/PostsView/PostsView.vue'),
       meta: {
         layout: MainLayout,
-        title: 'Posts'
+        title: 'Posts',
+        breadcrumb: (route: RouteLocationNormalizedLoaded) => [
+          {
+            title: 'Main Page',
+            link: Links.HOME
+          },
+          {
+            title: route.meta.title
+          }
+        ]
       }
     },
     {
@@ -30,7 +44,20 @@ const router = createRouter({
       component: () => import('@/views/PostView/PostView.vue'),
       meta: {
         layout: MainLayout,
-        title: `Post`
+        title: 'Post',
+        breadcrumb: (route: RouteLocationNormalizedLoaded) => [
+          {
+            title: 'Main Page',
+            link: Links.HOME
+          },
+          {
+            title: 'Posts',
+            link: Links.POSTS
+          },
+          {
+            title: route.params.id as string
+          }
+        ]
       }
     }
   ]

@@ -6,16 +6,19 @@
   --light-black: #222222;
   --black: black;
   --white: white;
+  --bc-color: #393131;
 
   //font-size
   --title-fs: 32px;
   --link-fs: 20px;
   --post-fs: 20px;
+  --bc-fs: 16px;
 
   @media (max-width: 768px) {
     --title-fs: 28px;
     --link-fs: 16px;
     --post-fs: 16px;
+    --bc-fs: 10px;
   }
 
   //font-weight

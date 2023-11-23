@@ -1,5 +1,6 @@
 <template>
   <div :class="contentClasses">
+    <UBreadcrumb />
     <PageContainer :is-full-width="device === 'mobile' ? true : false" :width="deviceWidth">
       {{ $route.meta.title }}
       <v-divider v-if="$route.meta.title"></v-divider>
@@ -14,6 +15,7 @@ import type { IPropsContent } from './PageContent.types';
 import { toRefs } from 'vue';
 import PageContainer from '../PageContainer/PageContainer.vue';
 import { useMedia } from '@/composables/useMedia';
+import UBreadcrumb from '../UBreadcrumb/UBreadcrumb.vue';
 
 const props = withDefaults(defineProps<IPropsContent>(), {
   isDark: false

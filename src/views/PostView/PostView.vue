@@ -15,8 +15,6 @@ import { posts } from '@/mock/posts';
 const route = useRoute();
 
 const post = posts.find((el) => el.id === +route.params.id);
-
-console.log(route.query);
 </script>
 
 <style src="./PostView.style.scss" lang="scss" scoped></style>
