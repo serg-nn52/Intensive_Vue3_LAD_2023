@@ -1,0 +1,41 @@
+.login-form {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  gap: 25px;
+  border-radius: 10px;
+  padding: 75px 25px;
+  label {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  input {
+    background-color: var(--grey);
+    padding: 5px 15px;
+    width: 400px;
+    border-radius: 5px;
+    outline: none;
+  }
+  .login-submit {
+    background-color: var(--grey);
+    padding: 5px 15px;
+    border-radius: 5px;
+    align-self: center;
+  }
+  .show {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    fill {
+      path {
+        color: var(--black);
+      }
+    }
+  }
+}

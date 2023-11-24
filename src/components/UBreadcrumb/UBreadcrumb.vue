@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumbs-wrapper">
     <div :key="index" v-for="(breadcrumb, index) in breadcrumbs" class="breadcrumbs">
-      <router-link v-if="breadcrumb.link" :to="breadcrumb.link">{{
+      <router-link v-if="breadcrumb.link" :to="{ path: breadcrumb.link, query: $route.query }">{{
         breadcrumb.title + '/'
       }}</router-link>
       <p v-else>{{ breadcrumb.title }}</p>

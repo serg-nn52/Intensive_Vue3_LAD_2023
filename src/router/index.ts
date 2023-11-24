@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, type RouteLocationNormalizedLoaded } from 'vue-router';
-import MainLayout from '@/layouts/MainLayout.vue';
+import MainLayout from '@/layouts/MainLayout/MainLayout.vue';
+import LoginLayout from '@/layouts/LoginLayout/LoginLayout.vue';
 import { Links, PathNames } from '@/constants/route.constants';
 import MainView from '@/views/MainView/MainView.vue';
 
@@ -27,6 +28,7 @@ const router = createRouter({
       meta: {
         layout: MainLayout,
         title: 'Posts',
+        requiredAuth: true,
         breadcrumb: (route: RouteLocationNormalizedLoaded) => [
           {
             title: 'Main Page',
@@ -45,6 +47,7 @@ const router = createRouter({
       meta: {
         layout: MainLayout,
         title: 'Post',
+        requiredAuth: true,
         breadcrumb: (route: RouteLocationNormalizedLoaded) => [
           {
             title: 'Main Page',
@@ -56,6 +59,24 @@ const router = createRouter({
           },
           {
             title: route.params.id as string
+          }
+        ]
+      }
+    },
+    {
+      path: Links.LOGIN,
+      name: PathNames.LOGIN,
+      component: () => import('@/views/LoginView/LoginView.vue'),
+      meta: {
+        layout: LoginLayout,
+        title: 'Login',
+        breadcrumb: (route: RouteLocationNormalizedLoaded) => [
+          {
+            title: 'Main Page',
+            link: Links.HOME
+          },
+          {
+            title: route.meta.title
           }
         ]
       }

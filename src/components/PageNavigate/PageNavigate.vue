@@ -3,16 +3,12 @@
     <PageContainer class="links-container" :width="deviceWidth" :is-full-width="false">
       <nav class="menu-links">
         <router-link
+          v-for="link in navigateLinks"
+          :key="link.title"
           active-class="active-link"
           class="link"
-          :to="{ name: PathNames.HOME, query: $route.query }"
-          >Main</router-link
-        >
-        <router-link
-          active-class="active-link"
-          class="link"
-          :to="{ name: PathNames.POSTS, query: $route.query }"
-          >Posts</router-link
+          :to="{ name: link.href, query: $route.query }"
+          >{{ link.title }}</router-link
         >
       </nav>
       <div>
@@ -28,7 +24,7 @@ import PageContainer from '../PageContainer/PageContainer.vue';
 import { computed } from 'vue';
 import { useMedia } from '@/composables/useMedia';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher.vue';
-import { PathNames } from '@/constants/route.constants';
+import { navigateLinks } from './PageNavigate.data';
 
 const { isDarkTheme } = useTheme();
 
