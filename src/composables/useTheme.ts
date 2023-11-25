@@ -1,14 +1,10 @@
-import { computed, toRefs } from 'vue';
-import { useRoute } from 'vue-router';
+import { useThemeStore } from '@/stores/theme';
+import { storeToRefs } from 'pinia';
 
 export const useTheme = () => {
-  const route = useRoute();
+  const themeStore = useThemeStore();
 
-  const { query } = toRefs(route);
-
-  const isDarkTheme = computed(() => {
-    return !!query.value.theme;
-  });
+  const { isDarkTheme } = storeToRefs(themeStore);
 
   return { isDarkTheme };
 };

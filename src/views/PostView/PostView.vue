@@ -7,34 +7,24 @@
         <p>{{ post?.body }}</p>
       </div>
       <div v-else>Пост не найден!</div>
+      <div v-if="isError">Error!</div>
     </PageContainer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { $api } from '@/api';
-import type { IPost } from '@/api/postsApi/postsApi.type';
 import PageContainer from '@/components/PageContainer/PageContainer.vue';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { usePostsStore } from '@/stores/posts';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
 
-const route = useRoute();
+const postsStore = usePostsStore();
 
-const post = ref<IPost>();
-const isLoading = ref<boolean>(false);
-const isError = ref<boolean>(false);
+const { post, isError, isLoading } = storeToRefs(postsStore);
+const { getPost } = postsStore;
 
-onMounted(async () => {
-  isLoading.value = true;
-  try {
-    post.value = await $api.getPost(+route.params.id);
-    isError.value = false;
-  } catch (error) {
-    isError.value = true;
-    console.error(error);
-  } finally {
-    isLoading.value = false;
-  }
+onMounted(() => {
+  getPost();
 });
 </script>
 

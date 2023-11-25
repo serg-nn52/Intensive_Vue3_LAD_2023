@@ -12,7 +12,7 @@
         })
       "
       :key="post?.id"
-      v-for="post of renderedPosts"
+      v-for="post of renderedPosts(isShowAllPosts)"
     >
       {{ post?.id + ' ' + post?.title }}
     </li>
@@ -24,34 +24,20 @@
 </template>
 
 <script setup lang="ts">
-import { $api } from '@/api';
-import type { IPost } from '@/api/postsApi/postsApi.type';
 import { PathNames } from '@/constants/route.constants';
-import { computed } from 'vue';
+import { usePostsStore } from '@/stores/posts';
+import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
 
-const posts = ref<IPost[]>([]);
-const isLoading = ref<boolean>(false);
-const isError = ref<boolean>(false);
-
 const isShowAllPosts = ref<boolean>(false);
+const postsStore = usePostsStore();
 
-const renderedPosts = computed(() => {
-  return isShowAllPosts.value ? posts.value : posts.value.slice(0, 10);
-});
+const { isError, isLoading, posts, renderedPosts } = storeToRefs(postsStore);
+const { getPosts } = postsStore;
 
-onMounted(async () => {
-  isLoading.value = true;
-  try {
-    posts.value = await $api.getPosts();
-    isError.value = false;
-  } catch (error) {
-    isError.value = true;
-    console.error(error);
-  } finally {
-    isLoading.value = false;
-  }
+onMounted(() => {
+  getPosts();
 });
 </script>
 

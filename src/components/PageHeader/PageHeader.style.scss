@@ -24,3 +24,13 @@
   color: var(--grey);
   transition: var(--default-delay);
 }
+.logout {
+  position: absolute;
+  font-size: 16px;
+  right: 5px;
+  bottom: 5px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: var(--black);
+  background-color: var(--white);
+}

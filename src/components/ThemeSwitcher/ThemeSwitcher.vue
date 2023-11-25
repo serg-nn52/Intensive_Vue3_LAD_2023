@@ -1,37 +1,27 @@
 <template>
   <v-switch
     :class="switchClasses"
-    v-model="isDark"
+    v-model="isDarkTheme"
     label="Teмная тема"
     hide-details
     :color="'white'"
     :base-color="'green'"
-    @update:model-value="$emit(Emits.CHANGE_DARK_THEME, isDark)"
+    @update:model-value="(value) => toggleTheme(!!value)"
   ></v-switch>
 </template>
 
 <script setup lang="ts">
-import { Emits } from '@/constants/emits.constants';
-import { computed, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useThemeStore } from '@/stores/theme';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
-const route = useRoute();
-const router = useRouter();
+const themeStore = useThemeStore();
 
-const isDark = ref(!!route.query.theme || false);
-
-watch(isDark, (newIsDark) => {
-  router.push({
-    query: newIsDark
-      ? {
-          theme: 'dark'
-        }
-      : {}
-  });
-});
+const { isDarkTheme } = storeToRefs(themeStore);
+const { toggleTheme } = themeStore;
 
 const switchClasses = computed(() => {
-  return { switch: true, ['dark-switch']: isDark.value };
+  return { switch: true, ['dark-switch']: isDarkTheme.value };
 });
 </script>
 

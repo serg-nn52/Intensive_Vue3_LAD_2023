@@ -7,7 +7,7 @@
           :key="link.title"
           active-class="active-link"
           class="link"
-          :to="{ name: link.href, query: $route.query }"
+          :to="{ name: link.href }"
           >{{ link.title }}</router-link
         >
       </nav>
@@ -29,7 +29,7 @@ import { navigateLinks } from './PageNavigate.data';
 const { isDarkTheme } = useTheme();
 
 const styles = computed(() => {
-  return { ['--dark-opacity']: isDarkTheme.value ? 1 : 0.8 };
+  return { ['--dark-opacity']: isDarkTheme ? 1 : 0.8 };
 });
 
 const { device } = useMedia();

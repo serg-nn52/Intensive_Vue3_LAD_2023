@@ -2,21 +2,12 @@ import { Api } from '../api';
 import type { IPost } from './postsApi.type';
 
 export class PostsApi extends Api {
-  private readonly url = this.baseUrl + '/posts';
-  constructor() {
+  private readonly url;
+  constructor(postsUrl: string) {
     super();
-    this.getPosts = async function (): Promise<IPost[]> {
-      const response = await fetch(this.url);
-      if (!response.ok) throw new Error(response.statusText);
-      const data = await response.json();
-      return data;
-    };
-    this.getPost = async function (id: number): Promise<IPost> {
-      const response = await fetch(`${this.url}/${id}`);
-      if (!response.ok) throw new Error(response.statusText);
-      const data = await response.json();
-      return data;
-    };
+    this.url = this.baseUrl + postsUrl;
+    this.getPosts = this.getEntity<IPost[]>(this.url);
+    this.getPost = (id: number | string) => this.getEntity<IPost>(this.url, id);
   }
   getPosts;
   getPost;
